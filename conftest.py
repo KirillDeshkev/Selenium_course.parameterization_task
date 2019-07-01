@@ -17,6 +17,7 @@ def browser(request):
         print("\nstart chrome browser for test..")
         options = Options()
         options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+        options.add_experimental_option('w3c', False)
         browser = webdriver.Chrome(options=options)
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")
@@ -25,6 +26,7 @@ def browser(request):
         browser = webdriver.Firefox(firefox_profile=fp)
     else:
         print("Browser {} still is not implemented".format(browser_name))
+    browser.implicitly_wait(5)
     yield browser
     print("\nquit browser..")
     browser.quit()
